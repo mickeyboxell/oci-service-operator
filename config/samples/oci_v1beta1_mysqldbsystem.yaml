@@ -1,0 +1,28 @@
+#
+# Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl.
+#
+
+apiVersion: oci.oracle.com/v1beta1
+kind: MySqlDbSystem
+metadata:
+  name: create-mysqldbsystem
+spec:
+  compartmentId: ocid1.compartment.oc1..aaaaaaaaq7y26khzcf7d5jdaakmrsuqtqfyqk7itv3zubkjizsbln6pnmoxa
+  displayName: BusyBoxDb
+  shapeName: MySQL.VM.Standard.E3.1.8GB
+  subnetId: ocid1.subnet.oc1.iad.aaaaaaaapuqci3e7gb4spkx7qk2lip2pmtv6ojmtor7ht2raen3n33fypkpq
+  configuration:
+    id: ocid1.mysqlconfiguration.oc1..aaaaaaaalwzc2a22xqm56fwjwfymixnulmbq3v77p5v4lcbb6qhkftxf2trq
+  availabilityDomain: zkJl:US-ASHBURN-AD-1
+  isHighlyAvailable: false
+  adminUsername:
+    secret:
+      secretName: admin-secret
+  adminPassword:
+    secret:
+      secretName: admin-secret
+  description: Creating a BusyBox Database using operators
+  dataStorageSizeInGBs: 50
+  port: 3306
+  portX: 33060

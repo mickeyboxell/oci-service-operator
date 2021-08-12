@@ -1,0 +1,37 @@
+#
+# Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl.
+#
+
+apiVersion: oci.oracle.com/v1beta1
+kind: AutonomousDatabases
+metadata:
+  name: autonomousdatabases-sample
+spec:
+#  Id: ocid1.autonomousdatabase.oc1.ap-mumbai-1.abrg6ljr46czi5qqfdauf3awd5yo27dpm2vlxxe3oeurfgmesulkzn6bwsnq
+  compartmentId: ocid1.compartment.oc1..aaaaaaaa5fm6q5imrlm2enuu42ybbqj6i7gy7lcrolzu2syu5gn2aosvyxsq
+  displayName: OSOKTesting
+  dbName: osokTest
+  dbWorkload: OLTP
+  isDedicated: false
+  dbVersion: 19c
+  dataStorageSizeInTBs: 2
+  cpuCoreCount: 1
+  adminPassword:
+    secret:
+      secretName: admin-password
+  isAutoScalingEnabled: true
+  isFreeTier: false
+  licenseModel: BRING_YOUR_OWN_LICENSE
+  wallet:
+    walletName: osoktest-wallet
+    walletPassword:
+      secret:
+        secretName: wallet-password
+  freeformTags:
+    key1: value1
+ # definedTags:
+ #   test:
+ #     key1: value1
+
+

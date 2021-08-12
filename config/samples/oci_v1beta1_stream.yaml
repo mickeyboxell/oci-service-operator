@@ -1,0 +1,16 @@
+#
+# Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl.
+#
+
+apiVersion: oci.oracle.com/v1beta1
+kind: Stream
+metadata:
+  name: stream-sample
+spec:
+  # compartmentId: ocid1.compartment.oc1..aaaaaaaa7b4am4p64ggqhqwfpl5u7zarlffp2y6q36villqklm2oxr53ocvq
+  name: StreamTesting
+  streamPoolId: ocid1.streampool.oc1.iad.amaaaaaa2ahbgkyavceblg4c4bcig5z7q2ozvxnoekdmghnof6q6hiwkwhkq
+  partitions: 1
+  retentionInHours: 24
+  # Id: ocid1.stream.oc1.eu-amsterdam-1.amaaaaaah4gjgpyasjxezzx3xg3v6mnmotkaedekvxhrtunhhckq6kfi5uew
