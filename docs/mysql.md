@@ -108,7 +108,7 @@ The Complete Specification of the `mysqldbsystems` Custom Resource (CR) is as de
 
 ## Provisioning a MySQL DB System
 
-Provisioning of a MySQL DB System requires the customer to input the admin username and admin password as a Kubernetes secret. OSOK acquires the admin usernmame and admin password from the Kubernetes secret whose name is provided in the `spec`. 
+Provisioning of a MySQL DB System requires the user to input the admin username and admin password as a Kubernetes secret. OSOK acquires the admin usernmame and admin password from the Kubernetes secret whose name is provided in the `spec`. 
 The Kubernetes secret should contain the admin username in `username` field. 
 The Kubernetes secret should contain the admin password in `password` field. 
 
@@ -130,7 +130,7 @@ kubectl apply -f <CREATE_SECRET>.yaml
 
 The MySQL DB System can be accessed from the Secret which will be persisted as part of the provision/bind operation of the CR.
 
-The OSOK MySqlDbSystem controller automatically provisions a MySQL DB System when customer provides mandatory fields to the `spec`. Following is a sample CR yaml for MySqlDbSystem.
+The OSOK MySqlDbSystem controller automatically provisions a MySQL DB System when you provide mandatory fields to the `spec`. The following is a sample CR yaml for MySqlDbSystem.
 
 - SUBNET_OCID - OCID of the subnet created in the pre-requisites step
 - CONFIGURATION_ID - [More info about Configurations](https://docs.oracle.com/en-us/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871) Get your [Configuration_id](https://console.us-ashburn-1.oraclecloud.com/mysqlaas/configurations) 
@@ -196,7 +196,7 @@ $ kubectl describe mysqldbsystems <NAME_OF_CR_OBJECT>
 
 ## Binding to an Existing MySQL DB System
 
-OSOK allows customers to bind to an existing MySQL DB System. In this case, `Id` is the only required field in the CR `spec`.
+OSOK allows you to bind to an existing MySQL DB System. In this case, `Id` is the only required field in the CR `spec`.
 
 ```yaml
 apiVersion: oci.oracle.com/v1beta1
@@ -214,7 +214,7 @@ kubectl apply -f <BIND_YAML>.yaml
 
 ## Updating a MySQL DB System
 
-Customers can also update a number of [parameters](https://docs.oracle.com/en-us/iaas/mysql-database/doc/managing-db-system.html#GUID-24D56090-C7E8-4A21-B450-BCBFAD231911) of the MySQL DB System.
+You can also update a number of [parameters](https://docs.oracle.com/en-us/iaas/mysql-database/doc/managing-db-system.html#GUID-24D56090-C7E8-4A21-B450-BCBFAD231911) of the MySQL DB System.
 ```yaml
 apiVersion: oci.oracle.com/v1beta1
 kind: MySqlDbSystem
@@ -242,7 +242,7 @@ kubectl apply -f <UPDATE_YAML>.yaml
 
 The Access information of a OCI Service or Resource will be created as a Kubernetes secret to manage the MySQL DB System. The name of the secret can be provided in the CR yaml or by default the name of the CR will be used.
 
-Customer will get the access information as Kubernetes Secret to use the MySQL DB System. The following files/details will be made available to the user:
+You will get the access information as Kubernetes Secret to use the MySQL DB System. The following files/details will be made available to you:
 
 | Parameter           | Description                                                              | Type   |
 | ------------------  | ------------------------------------------------------------------------ | ------ |
