@@ -1,4 +1,4 @@
-# MySQL Database Service
+# Oracle MySQL Database Service
 
 - [Introduction](#introduction)
 - [MySQL DB System Pre-requisites](#pre-requisites-for-setting-up-mysql-dbsystems)
