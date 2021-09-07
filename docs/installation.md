@@ -20,7 +20,7 @@ The Operator SDK installation is documented in detail by the operator-sdk projec
 
 ### Install OLM
 
-Install the OLM from the operator-sdk, you can use the following command:
+Install OLM from the operator-sdk using the following command:
 ```bash
 $ operator-sdk olm install 
 ...
@@ -30,7 +30,7 @@ INFO[0079] Successfully installed OLM version "latest"
 
 ### Verify Installation
 
-You can verify your installation of OLM by first checking for all the necessary CRDs in the cluster:
+You can verify your installation of OLM by first checking for all the necessary CRDs are present in the cluster:
 
 ```bash
 $ operator-sdk olm status
@@ -69,28 +69,28 @@ system:controller:operator-lifecycle-manager                 ClusterRole        
 
 ### Enable Instance Principal
 
-The OCI Service Operator for Kuberentes needs OCI Instance Principal details to provision and manage OCI services/resources in the customer tenancy. This is the recommended approach for running OSOK within OCI. 
+The OCI Service Operator for Kuberentes (OSOK) needs OCI Instance Principal details to provision and manage OCI services/resources in the your tenancy. This is the recommended approach for running OSOK within OCI. 
 
-The customer is required to create a OCI dynamic group as detailed [here](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingdynamicgroups.htm#Managing_Dynamic_Groups).
+You are required to create a OCI dynamic group as detailed [here](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingdynamicgroups.htm#Managing_Dynamic_Groups).
 
-Once the dynamic group is created, below sample matching rule can be added to the dynamic group
+After creating a dynamic group you must create a matching rule similar to the sample below:
 ```
-#### Below rule matches the kubernetes worker instance ocid or the compartment where the worker instances are running
+#### The rule below matches the Kubernetes worker instance ocid or the compartment where the worker instances are running
  
 Any {instance.id = 'ocid1.instance.oc1.iad..exampleuniqueid1', instance.compartment.id = 'ocid1.compartment.oc1..exampleuniqueid2'}
 
 ``` 
 
-Customer needs to create an OCI Policy that can be tenancy wide or in the compartment for the dynamic group created above.
+You must create an OCI policy that can be tenancy wide or limited to the compartment of the dynamic group above.
 
 ```
-### Tenancy based OCI Policy for the dynamic group
+### Tenancy based OCI policy for the dynamic group
 Allow dynamic-group <DYNAMICGROUP_NAME> to manage <OCI_SERVICE_1> in tenancy
 Allow dynamic-group <DYNAMICGROUP_NAME> to manage <OCI_SERVICE_2> in tenancy
 Allow dynamic-group <DYNAMICGROUP_NAME> to manage <OCI_SERVICE_3> in tenancy
 Allow dynamic-group <DYNAMICGROUP_NAME> to manage <OCI_SERVICE_4> in tenancy
  
-### Compartment based OCI Policy for the dynamic group
+### Compartment based OCI policy for the dynamic group
 Allow dynamic-group <DYNAMICGROUP_NAME> to manage <OCI_SERVICE_1> in compartment <NAME_OF_THE_COMPARTMENT>
 Allow dynamic-group <DYNAMICGROUP_NAME> to manage <OCI_SERVICE_2> in compartment <NAME_OF_THE_COMPARTMENT>
 Allow dynamic-group <DYNAMICGROUP_NAME> to manage <OCI_SERVICE_3> in compartment <NAME_OF_THE_COMPARTMENT>
@@ -100,13 +100,13 @@ Note: the <OCI_SERVICE_1>, <OCI_SERVICE_2> represents in the OCI Services like "
 
 ### Enable User Principal 
 
-The OCI Service Operator for Kubernetes needs OCI user credentials details to provision and manage OCI services/resources in the customer tenancy. This approach is recommended when OSOK is deployed outside OCI. 
+The OCI Service Operator for Kubernetes needs OCI user credentials details to provision and manage OCI services/resources in you tenancy. This approach is recommended when OSOK is deployed outside OCI. 
 
-The users required to create a Kubernetes secret as detailed below.
+You are required to create a Kubernetes secret as detailed below.
 
-The OSOK will be deployed in `oci-service-operator-system` namespace. For enabling user principals, we need to create the namespace before deployment.
+OSOK will be deployed in `oci-service-operator-system` namespace. To enable user principals, you must to create the namespace before deployment.
 
-Create a yaml file using below details
+Create a yaml file using the following details:
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -116,12 +116,12 @@ metadata:
   name: oci-service-operator-system
 ```
 
-Create the namespace in the kubernetes cluster using below command
+Create the namespace in the Kubernetes cluster using the following command:
 ```bash
 $ kubectl apply -f <FILE_NAME_ABOVE>
 ```
 
-The secret should have the below Keys and respective values for it:
+The secret should include the keys below:
 
 | Key | Description |
 | --------- | ----------- |
@@ -132,7 +132,7 @@ The secret should have the below Keys and respective values for it:
 | `passphrase`    | The passphrase of the private key. This is mandatory and if the private key does not have a passphrase, then set the value to an empty string. |
 | `region`    | The region in which the OKE cluster is running. The value should be in OCI region format. Example: us-ashburn-1 |
 
-Run the below command to create Secret by name `ociCredentials`. (Replace values with your user credentials)
+Create a secret named `ociCredentials`, replacing the values below with your user credentials:
 
 ```bash
 $ kubectl -n oci-service-operator-system create secret generic ocicredentials \
@@ -144,9 +144,9 @@ $ kubectl -n oci-service-operator-system create secret generic ocicredentials \
 --from-file=privatekey=<PATH_OF_USER_PRIVATE_API_KEY>
 ```
 
-The name of the secret will passed in the `osokConfig` config map which will be created as part of the OSOK deployment. By default the name of the user credential secret is `ocicredentials`. Also, the secret should be created in the `oci-service-operator-system` namespace.
+The name of the secret will passed in the `osokConfig` configmap which will be created as part of the OSOK deployment. By default, the name of the user credential secret is `ocicredentials`. The secret should be created in the `oci-service-operator-system` namespace.
 
-The customer should create a OSOK operator user and can add him to a IAM group `osok-operator-group`. Customer should create an OCI Policy that can be tenancy wide or in the compartment to manage the OCI Services
+You must create an OSOK operator user and add them to the `osok-operator-group` IAM group. Then you must create an OCI policy that can be tenancy wide or specific to a compartment to manage OCI services:
 
 ```
 ### Tenancy based OCI Policy for user
@@ -165,22 +165,22 @@ Note: the <OCI_SERVICE_1>, <OCI_SERVICE_2> represents in the OCI Services like "
 
 ### Deploy OSOK
 
-The OCI Service Operator for Kubernetes is packaged as Operator Lifecycle Manager (OLM) Bundle for making it easy to install in Kubernetes Clusters. The bundle can be downloaded as docker image using below command.
+The OCI Service Operator for Kubernetes (OSOK) is packaged as Operator Lifecycle Manager (OLM) bundle to make it easy to install in Kubernetes Clusters. The bundle can be downloaded as docker image using the command below: 
 
 ```bash
 $ docker pull iad.ocir.io/oracle/oci-service-operator-bundle:0.0.2
 ```
 
-The OSOK OLM bundle contains all the required details like CRDs, RBACs, Configmaps, deployment which will install the OSOK in the kubernetes cluster.
+The OSOK OLM bundle contains all the required details (CRDs, RBACs, configmaps, deployments, etc.) to install the OSOK in the Kubernetes cluster.
 
 
-Install the OSOK Operator in the Kubernetes Cluster using below command 
+Install the OSOK Operator in the Kubernetes Cluster: 
 
 ```bash
 $ operator-sdk run bundle iad.ocir.io/oracle/oci-service-operator-bundle:0.0.2
 ```
 
-Upgrade the OSOK Operator in the Kubernetes Cluster using below command
+Upgrade the OSOK Operator in the Kubernetes Cluster:
 
 ```bash
 $ operator-sdk run bundle-upgrade iad.ocir.io/oracle/oci-service-operator-bundle:0.0.2
@@ -193,7 +193,7 @@ INFO[0040] OLM has successfully installed "oci-service-operator.v0.0.2"
 
 ### Undeploy OSOK
 
-The OCI Service Operator for Kubernetes can be undeployed easily using the OLM
+The OCI Service Operator for Kubernetes (OSOK) can be easily undeployed using OLM:
 
 ```bash
 $ operator-sdk cleanup oci-service-operator
