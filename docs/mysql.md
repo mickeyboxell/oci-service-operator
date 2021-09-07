@@ -14,7 +14,7 @@
 [Oracle MySQL Database Service](https://www.oracle.com/mysql/) is a fully managed database service that lets developers quickly develop and deploy secure, cloud native applications using the world’s most popular open source database. Oracle MySQL Database Service is also offered via the OCI Service Operator for Kubernetes, making it easy for applications to provision and integrate seamlessly with MySQL databases.
 
 
-## Pre-requisites for setting up Mysql DbSystems
+## Pre-requisites for setting up MySQL DB Systems
 
 If this is your first time using MySQL Database Service, ensure your tenancy administrator has performed the following tasks:
 
